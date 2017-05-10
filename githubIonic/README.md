@@ -12,12 +12,5 @@ To see the app running in different SO you can run the command:
 or if you already started the serve, you can do:
 > ...//localhost:8100/ionic-lab
 
-You will see, on your project structure, there is a lot of files and folders
-we will spend most of the time on the "src" folder, because there is where
-the application logic is.
-
-The whole app, is usually loaded from a simple src/index.html file. which
-during build is copied to the "www" folder.
-
-The *src/app/app.component.ts* is the root component of our app. It is loaded/declared in the *src/app/app.module.ts*, which simply represents our whole app as a module, which is the loaded in the app/main.dev.ts or app/main.prod.ts, depending on which build you do. 
-
+To generate new pages, erase the ones in the project and use the commands
+> ionic g pages (name)
