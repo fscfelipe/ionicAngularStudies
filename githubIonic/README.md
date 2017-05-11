@@ -14,3 +14,6 @@ or if you already started the serve, you can do:
 
 To generate new pages, erase the ones in the project and use the commands
 > ionic g pages (name)
+
+To get the response from github api, we need to generate a provider:
+> ionic g provider github-users
