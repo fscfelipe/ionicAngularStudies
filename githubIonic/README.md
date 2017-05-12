@@ -30,3 +30,5 @@ If any error occur, check those links
 [Link2 - stackoverflow](http://stackoverflow.com/questions/42613882/error-could-not-find-gradle-wrapper-within-android-sdk-might-need-to-update-yo)
 
 
+some build info:
+[New: Better Error Reporting for Ionic Apps](http://blog.ionic.io/improvements-to-ionic-build-process/)
