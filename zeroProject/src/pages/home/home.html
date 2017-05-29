@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Cardappio
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,4 +11,19 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
+
+//ionic component FAB
+// é necessário criar uma page pra ele? como fazê-lo executar as ações?
+  <ion-fab right bottom>
+    <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      //AQUI PODERÃO SER MODIFICADOS OS BOTÕES DE COMPARTILHAMENTOS
+      //OU BOTÕES PARA AÇÕES ESPECÍFICAS NO APP
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>
