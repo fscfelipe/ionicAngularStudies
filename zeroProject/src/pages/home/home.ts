@@ -28,4 +28,9 @@ export class HomePage {
   //    </ion-buttons>
   //
 
+  //Função de pesquisa da home
+  pesquisar(){
+    
+  }
+
 }

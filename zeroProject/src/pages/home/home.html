@@ -7,13 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  Página inicial em construção.
 
-<!-- ionic component FAB
- é necessário criar uma page pra ele? como fazê-lo executar as ações? -->
+  <!--AQUI É A BARRA DE PESQUISA, AS FUNÇÕES QUE SERÃO EXECUTADAS NA PESQUISA AINDA PRECISAM
+  SER IMPLEMENTADAS.
+  documentação = https://ionicframework.com/docs/components/#searchbar
+   -->
+  <ion-searchbar (ionInput)="pesquisar($event)"></ion-searchbar>
+
+
+  <!-- ionic component FAB
+  é necessário criar uma page pra ele? como fazê-lo executar as ações? -->
   <ion-fab right bottom>
     <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
     <ion-fab-list side="left">
