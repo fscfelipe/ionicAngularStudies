@@ -6,11 +6,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+//Aqui também serão referenciadas as páginas
+import { MapPage } from '../pages/map-page/map-page';
 
+//Também é necessário adicionar as referências nas 'declarations'
+// e nos 'entryComponents'
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    MapPage
   ],
   imports: [
     BrowserModule,
@@ -19,7 +24,8 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    MapPage
   ],
   providers: [
     StatusBar,
