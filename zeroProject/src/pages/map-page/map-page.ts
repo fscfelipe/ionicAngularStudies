@@ -1,17 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController } from 'ionic-angular';
 
-//import adicionado para o inserir o mapa e funcionalidades
-// ver: https://ionicframework.com/docs/native/google-maps/
-import {
- GoogleMaps,
- GoogleMap,
- GoogleMapsEvent,
- LatLng,
- CameraPosition,
- MarkerOptions,
- Marker
-} from '@ionic-native/google-maps';
 
 /**
  * Generated class for the MapPage page.
@@ -25,45 +14,31 @@ import {
   templateUrl: 'map-page.html',
 })
 export class MapPage {
-  map: GoogleMap;
  
-    constructor(public navCtrl: NavController, public platform: Platform) {
-        platform.ready().then(() => {
-            this.loadMap();
-        });
+    @ViewChild('map') mapElement;
+    map: any;
+
+    constructor(public navCtrl: NavController) {
+
     }
- 
-    loadMap(){
- 
-        let location = new LatLng(-34.9290,138.6010);
- 
-        this.map = new GoogleMap('map', {
-          'backgroundColor': 'white',
-          'controls': {
-            'compass': true,
-            'myLocationButton': true,
-            'indoorPicker': true,
-            'zoom': true
-          },
-          'gestures': {
-            'scroll': true,
-            'tilt': true,
-            'rotate': true,
-            'zoom': true
-          },
-          'camera': {
-            'latLng': location,
-            'tilt': 30,
-            'zoom': 15,
-            'bearing': 50
-          }
-        });
- 
-        this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-            console.log('Map is ready!');
-        });
- 
+
+    ionViewDidLoad(){
+      this.initMap();
+    } 
+
+    initMap(){
+      let latLng = new google.maps.LatLng(-3.72839, -38.5234);
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions)
+
     }
+    
 }
 
  
