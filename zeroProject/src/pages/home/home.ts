@@ -6,6 +6,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 
 //imports para tutorial do joshmorony, só para testes
 import { AlertController, ActionSheetController } from 'ionic-angular';
+import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -19,11 +20,27 @@ export class HomePage {
   // EX: public x: number = 0;
   // Para acessar a variável no página html, usar {{x}}
 
+  itemsQuery: FirebaseListObservable<any[]>;
+  originalItems: FirebaseListObservable<any[]>;
   items: FirebaseListObservable<any[]>;
+  itemSubject: Subject<any>;
+  
+  
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ,
-  db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
-    this.items = db.list('/items');
+  public db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
+    this.itemSubject = new Subject();
+    
+    this.itemsQuery = db.list('/items', {
+      query: {
+        orderByChild: 'title',
+        equalTo: this.itemSubject
+      }
+    });
+
+    this.originalItems = db.list('/items', {query: {orderByChild: 'title'}});
+    this.items = db.list('/items', {query: {orderByChild: 'title'}});
+    
   }
 
   //Aqui em baixo, poderão ser adicionador método que irão manipular
@@ -39,8 +56,17 @@ export class HomePage {
   //
 
   //Função de pesquisa da home
-  pesquisar(){
-    
+  pesquisar(searchEvent){
+    let term = searchEvent.target.value || '';
+    // We will only perform the search if we have 3 or more characters
+    if (term.trim() === '' || term.trim().length < 3) {
+      // Load cached users
+      this.items = this.originalItems;
+    } else {
+       this.itemSubject.next(term) ;
+       this.items = this.itemsQuery;
+    }
+    console.log(term);
   }
 
   addItem(){
