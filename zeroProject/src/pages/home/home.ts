@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+//import necessário para firebase
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+//imports para tutorial do joshmorony, só para testes
+import { AlertController } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -12,8 +18,10 @@ export class HomePage {
   // EX: public x: number = 0;
   // Para acessar a variável no página html, usar {{x}}
 
-  constructor(public navCtrl: NavController) {
+  items: FirebaseListObservable<any[]>;
 
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController ,db: AngularFireDatabase) {
+    this.items = db.list('/items');
   }
 
   //Aqui em baixo, poderão ser adicionador método que irão manipular
@@ -31,6 +39,36 @@ export class HomePage {
   //Função de pesquisa da home
   pesquisar(){
     
+  }
+
+  addItem(){
+  let prompt = this.alertCtrl.create({
+    title: 'Nome do item',
+    message: "Digite um nome para o item",
+    inputs: [
+      {
+        name: 'title',
+        placeholder: 'Name'
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.items.push({
+            title: data.title
+          });
+        }
+      }
+    ]
+  });
+  prompt.present();
   }
 
 }

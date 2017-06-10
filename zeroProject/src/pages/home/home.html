@@ -7,6 +7,13 @@
     <ion-title>
       Cardappio
     </ion-title>
+<!-- BOTÃO PARA ADICIOAR ITEM A LISTA -->
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
@@ -18,6 +25,13 @@
   documentação = https://ionicframework.com/docs/components/#searchbar
    -->
   <ion-searchbar placeholder="Pesquise..." (ionInput)="pesquisar($event)"></ion-searchbar>
+
+  <!-- LISTA DOS ITEMS QUE ESTÃO NO FIREBASE-->
+  <ion-list>
+    <ion-item *ngFor="let item of items | async" (click)="showOptions(item.$key, item.title)">
+      {{item.title}}
+    </ion-item>
+  </ion-list>
 
 
   <!-- ionic component FAB

@@ -10,10 +10,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {MapPage} from '../pages/map-page/map-page';
 
 import { HomePage } from '../pages/home/home';
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   //adicionado para criação do side menu
   @ViewChild(Nav) nav: Nav;
   pages: Array<{title: string, component: any}>;
