@@ -8,7 +8,7 @@ import { IonicPage, NavController } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-map-page',
   templateUrl: 'map-page.html',
