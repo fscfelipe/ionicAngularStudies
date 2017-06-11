@@ -17,6 +17,7 @@ export class MapPage {
  
     @ViewChild('map') mapElement;
     map: any;
+    marker: google.maps.Marker;
 
     constructor(public navCtrl: NavController) {
 
@@ -36,6 +37,15 @@ export class MapPage {
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions)
+
+      //forma simples de adicionar marcador, ver como adicionar uma lista de marcadores
+      // de uma vez, e trocar images, além de ver como conseguir os pontos geolocais a
+      //partir de um endereço.
+      this.marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: 'Hello World!'
+        });
 
     }
     
