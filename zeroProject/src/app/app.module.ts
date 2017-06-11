@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 //Aqui também serão referenciadas as páginas
 import { MapPage } from '../pages/map-page/map-page';
+import { EstabelecimentoDetails } from '../pages/estabelecimento-details/estabelecimento-details';
 
 
 //imports necessários para utilizar o firebase
@@ -23,7 +24,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   declarations: [
     MyApp,
     HomePage,
-    MapPage
+    MapPage,
+    EstabelecimentoDetails
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   entryComponents: [
     MyApp,
     HomePage,
-    MapPage
+    MapPage,
+    EstabelecimentoDetails
   ],
   providers: [
     StatusBar,

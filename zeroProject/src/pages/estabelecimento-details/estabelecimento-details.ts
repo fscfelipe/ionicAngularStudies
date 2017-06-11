@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { FirebaseListObservable } from 'angularfire2/database';
+
 /**
  * Generated class for the EstabelecimentoDetails page.
  *
@@ -14,7 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EstabelecimentoDetails {
 
+   item: FirebaseListObservable<any>;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.item = navParams.get('item');
+    console.log(this.item);
   }
 
   ionViewDidLoad() {

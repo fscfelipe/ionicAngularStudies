@@ -8,6 +8,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AlertController, ActionSheetController } from 'ionic-angular';
 import {Subject} from 'rxjs/Subject';
 
+import { EstabelecimentoDetails } from '../estabelecimento-details/estabelecimento-details';
+
 
 @Component({
   selector: 'page-home',
@@ -99,8 +101,8 @@ export class HomePage {
   prompt.present();
 }
 
-showOptions(itemId, itemTitle) {
-  let actionSheet = this.actionSheetCtrl.create({
+showOptions(item) {
+  /*let actionSheet = this.actionSheetCtrl.create({
     title: 'O que você quer fazer?',
     buttons: [
       {
@@ -124,6 +126,8 @@ showOptions(itemId, itemTitle) {
     ]
   });
   actionSheet.present();
+  */
+   this.navCtrl.push(EstabelecimentoDetails, {item});
 }
 
 removeItem(itemId: string){
@@ -160,5 +164,6 @@ updateItem(itemId, itemTitle){
   });
   prompt.present();
 }
+
 
 }
