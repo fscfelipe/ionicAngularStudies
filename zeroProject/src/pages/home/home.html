@@ -29,6 +29,7 @@
   <!-- LISTA DOS ITEMS QUE ESTÃO NO FIREBASE-->
   <ion-list>
     <ion-item *ngFor="let item of items | async" (click)="showOptions(item)">
+      <ion-avatar item-left><img [src]="item.imageURL"></ion-avatar>
       {{item.title}}
     </ion-item>
   </ion-list>
