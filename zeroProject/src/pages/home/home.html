@@ -28,25 +28,13 @@
 
   <!-- LISTA DOS ITEMS QUE ESTÃO NO FIREBASE-->
   <ion-list>
-    <ion-item *ngFor="let item of items | async" (click)="showOptions(item)">
-      <ion-avatar item-left><img [src]="item.imageURL"></ion-avatar>
-      {{item.title}}
+    <ion-item *ngFor="let item of items | async" (click)="showOptions(item, item.cardapios.cardapio1)">
+      <ion-avatar item-start>
+        <img [src]="item.imageURL">
+      </ion-avatar>
+        <h2>{{item.dados.nome}}</h2>
+        <p>{{item.dados.rua}}, {{item.dados.numero}} - {{item.dados.bairro}}</p>
     </ion-item>
   </ion-list>
-
-
-  <!-- ionic component FAB
-  é necessário criar uma page pra ele? como fazê-lo executar as ações? -->
-  <ion-fab right bottom>
-    <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
-    <ion-fab-list side="left">
-      <!--AQUI PODERÃO SER MODIFICADOS OS BOTÕES DE COMPARTILHAMENTOS
-      OU BOTÕES PARA AÇÕES ESPECÍFICAS NO APP -->
-      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
 
 </ion-content>

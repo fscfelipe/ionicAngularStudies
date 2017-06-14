@@ -33,15 +33,17 @@ export class HomePage {
   public db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
     this.itemSubject = new Subject();
     
+    //para a função de pesquisa, e recebimento dos dados
+    //é preciso ter atenção quanto a padronização do banco
     this.itemsQuery = db.list('/items', {
       query: {
-        orderByChild: 'title',
+        orderByChild: 'nome',
         equalTo: this.itemSubject
       }
     });
 
-    this.originalItems = db.list('/items', {query: {orderByChild: 'title'}});
-    this.items = db.list('/items', {query: {orderByChild: 'title'}});
+    this.originalItems = db.list('/items', {query: {orderByChild: 'nome'}});
+    this.items = db.list('/items', {query: {orderByChild: 'nome'}});
     
   }
 
@@ -68,7 +70,6 @@ export class HomePage {
        this.itemSubject.next(term) ;
        this.items = this.itemsQuery;
     }
-    console.log(term);
   }
 
   addItem(){
@@ -101,7 +102,7 @@ export class HomePage {
   prompt.present();
 }
 
-showOptions(item) {
+showOptions(item, itemCardapios) {
   /*let actionSheet = this.actionSheetCtrl.create({
     title: 'O que você quer fazer?',
     buttons: [
@@ -127,7 +128,7 @@ showOptions(item) {
   });
   actionSheet.present();
   */
-   this.navCtrl.push(EstabelecimentoDetails, {item});
+   this.navCtrl.push(EstabelecimentoDetails, {item, itemCardapios});
 }
 
 removeItem(itemId: string){

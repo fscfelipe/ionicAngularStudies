@@ -6,11 +6,24 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>{{item.title}} Informações</ion-title>
+    <ion-title>{{item.dados.nome}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-    <h3>Items Details view page</h3>
+
+<!-- dimensions set using input properties -->
+<img id="imgCardapioEst" [src]="item.imageURL"/>
+
+  <ion-list>
+  <ion-item *ngFor="let produto of produtos | toArray" >
+    <ion-thumbnail item-start>
+      <img [src]="produto.imageURL">
+    </ion-thumbnail>
+    <h2>{{produto.nome}}</h2>
+    <p>{{produto.descricao}}</p>
+    <button ion-button clear item-end>R${{produto.preco}}</button>
+  </ion-item>
+</ion-list>
+
 </ion-content>

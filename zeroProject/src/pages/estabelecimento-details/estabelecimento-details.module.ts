@@ -4,10 +4,10 @@ import { EstabelecimentoDetails } from './estabelecimento-details';
 
 @NgModule({
   declarations: [
-    EstabelecimentoDetails,
+    EstabelecimentoDetails
   ],
   imports: [
-    IonicPageModule.forChild(EstabelecimentoDetails),
+    IonicPageModule.forChild(EstabelecimentoDetails)
   ],
   exports: [
     EstabelecimentoDetails
