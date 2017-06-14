@@ -16,6 +16,7 @@ import { EstabelecimentoDetails } from '../pages/estabelecimento-details/estabel
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { MainPipe } from '../pipes/main-pipe.module';
 
 
 //Também é necessário adicionar as referências nas 'declarations'
@@ -31,7 +32,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase, 'cardappio'),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    MainPipe
   ],
   bootstrap: [IonicApp],
   entryComponents: [
