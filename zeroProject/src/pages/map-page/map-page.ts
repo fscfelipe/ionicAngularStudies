@@ -17,10 +17,9 @@ export class MapPage {
  
     @ViewChild('map') mapElement;
     map: any;
-    marker: google.maps.Marker;
 
     constructor(public navCtrl: NavController) {
-
+      
     }
 
     ionViewDidLoad(){
@@ -38,16 +37,32 @@ export class MapPage {
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions)
 
+      var content = 'dfdf';
+      
+       // A new Info Window is created and set content
+    var infowindow = new google.maps.InfoWindow({
+       content: content,
+    });
+
+            
       //forma simples de adicionar marcador, ver como adicionar uma lista de marcadores
       // de uma vez, e trocar images, além de ver como conseguir os pontos geolocais a
       //partir de um endereço.
-      this.marker = new google.maps.Marker({
-          position: latLng,
-          map: this.map,
-          title: 'Hello World!'
-        });
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: this.map
+      });
 
-    }
+      marker.addListener('click', function() {
+          infowindow.open(this.map, marker);
+      });
+      
+    //icon: 'https://goo.gl/wUL3p7'er);
+
+  
+      
+  }
+  
     
 }
 
