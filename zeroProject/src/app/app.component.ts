@@ -11,7 +11,7 @@ import {MapPage} from '../pages/map-page/map-page';
 
 import { HomePage } from '../pages/home/home';
 import { TestPage } from '../pages/test-page/test-page';
-
+import { Estabelecimentos } from '../pages/estabelecimentos/estabelecimentos';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,6 +27,7 @@ export class MyApp {
   rootPage:any = HomePage;
   mapPage:any = MapPage;
   testPage:any = TestPage;
+  estabPage:any = Estabelecimentos;
 
   //os argumentos do construtor foram colocados em public, para o método de inicializar
   // o app utilizar essar variáveis.
@@ -38,7 +39,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Mapa', component: MapPage },
-      { title: 'Teste', component: TestPage }
+      { title: 'Teste', component: TestPage },
+      { title: 'Estab', component: Estabelecimentos }
     ];
   }
 

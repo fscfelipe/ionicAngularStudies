@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { MapPage } from '../pages/map-page/map-page';
 import { EstabelecimentoDetails } from '../pages/estabelecimento-details/estabelecimento-details';
 import { TestPage } from '../pages/test-page/test-page';
+import { Estabelecimentos } from '../pages/estabelecimentos/estabelecimentos';
 
 
 //imports necessários para utilizar o firebase
@@ -28,6 +29,7 @@ import { MainPipe } from '../pipes/main-pipe.module';
     HomePage,
     MapPage,
     EstabelecimentoDetails,
+    Estabelecimentos,
     TestPage
   ],
   imports: [
@@ -43,6 +45,7 @@ import { MainPipe } from '../pipes/main-pipe.module';
     HomePage,
     MapPage,
     EstabelecimentoDetails,
+    Estabelecimentos,
     TestPage
   ],
   providers: [
