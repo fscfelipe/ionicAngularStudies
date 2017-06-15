@@ -9,6 +9,7 @@ import { AlertController, ActionSheetController } from 'ionic-angular';
 import {Subject} from 'rxjs/Subject';
 
 import { EstabelecimentoDetails } from '../estabelecimento-details/estabelecimento-details';
+import { MapPage } from '../map-page/map-page';
 
 
 @Component({
@@ -22,16 +23,24 @@ export class HomePage {
   // EX: public x: number = 0;
   // Para acessar a variável no página html, usar {{x}}
 
-  itemsQuery: FirebaseListObservable<any[]>;
-  originalItems: FirebaseListObservable<any[]>;
-  items: FirebaseListObservable<any[]>;
-  itemSubject: Subject<any>;
-  
+  estabQuery: FirebaseListObservable<any[]>;
+  originalEstabele: FirebaseListObservable<any[]>;
+  estabelecimentos: FirebaseListObservable<any[]>;
+  estabSubject: Subject<any>;
+  estabArray: Array<any>;
   
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ,
   public db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
-    this.itemSubject = new Subject();
+    //instanciando as tabs
+
+
+    this.estabelecimentos = db.list('/estabelecimentos');
+    this.estabArray = new Array;
+    this.iniciarEstabelecimentos();
+    console.log(this.estabelecimentos);
+
+    /*this.itemSubject = new Subject();
     
     //para a função de pesquisa, e recebimento dos dados
     //é preciso ter atenção quanto a padronização do banco
@@ -43,7 +52,7 @@ export class HomePage {
     });
 
     this.originalItems = db.list('/items', {query: {orderByChild: 'nome'}});
-    this.items = db.list('/items', {query: {orderByChild: 'nome'}});
+    this.items = db.list('/items', {query: {orderByChild: 'nome'}});*/
     
   }
 
@@ -60,15 +69,35 @@ export class HomePage {
   //
 
   //Função de pesquisa da home
+  iniciarEstabelecimentos(){
+    this.getDB('/estabelecimentos').subscribe( snapshots => {
+      snapshots.forEach(snapshot => {
+        this.getDB('/estabelecimentos/'+snapshot.key).subscribe(snapshots =>{
+          snapshots.forEach(snapshot => {
+            this.estabArray.push(snapshot);
+          });
+        });
+      });
+    });
+    console.log(this.estabArray);
+  }
+
+  getDB(url: string): FirebaseListObservable<any>{
+    return this.db.list(url, {preserveSnapshot: true});
+  }
+
+  printa(item){
+    console.log(item);
+  }
   pesquisar(searchEvent){
     let term = searchEvent.target.value || '';
     // We will only perform the search if we have 3 or more characters
     if (term.trim() === '' || term.trim().length < 3) {
       // Load cached users
-      this.items = this.originalItems;
+      this.estabelecimentos = this.originalEstabele;
     } else {
-       this.itemSubject.next(term) ;
-       this.items = this.itemsQuery;
+       this.estabSubject.next(term) ;
+       this.estabelecimentos = this.estabQuery;
     }
   }
 
@@ -92,7 +121,7 @@ export class HomePage {
       {
         text: 'Save',
         handler: data => {
-          this.items.push({
+          this.estabelecimentos.push({
             title: data.title
           });
         }
@@ -132,7 +161,7 @@ showOptions(item, itemCardapios) {
 }
 
 removeItem(itemId: string){
-  this.items.remove(itemId);
+  this.estabelecimentos.remove(itemId);
 }
 
 updateItem(itemId, itemTitle){
@@ -156,7 +185,7 @@ updateItem(itemId, itemTitle){
       {
         text: 'Save',
         handler: data => {
-          this.items.update(itemId, {
+          this.estabelecimentos.update(itemId, {
             title: data.title
           });
         }
@@ -165,6 +194,4 @@ updateItem(itemId, itemTitle){
   });
   prompt.present();
 }
-
-
 }

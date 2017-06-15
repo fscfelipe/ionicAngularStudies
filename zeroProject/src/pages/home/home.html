@@ -1,6 +1,7 @@
 <ion-header>
+  
   <ion-navbar>
-    <!--é preciso adicionar a tag do menu em todas as páginas que ele terá -->
+    <!-- é preciso adicionar a tag do menu em todas as páginas que ele terá -->
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -14,7 +15,8 @@
       </button>
     </ion-buttons>
 
-  </ion-navbar>
+  </ion-navbar> 
+  
 </ion-header>
 
 <ion-content padding>
@@ -28,13 +30,14 @@
 
   <!-- LISTA DOS ITEMS QUE ESTÃO NO FIREBASE-->
   <ion-list>
-    <ion-item *ngFor="let item of items | async" (click)="showOptions(item, item.cardapios.cardapio1)">
+    <!-- (click)="showOptions(item, item.cardapios.cardapio1)" -->
+    <ion-item *ngFor="let estabelecimento of estabArray" (click)="printa(estabelecimento)" >
       <ion-avatar item-start>
-        <img [src]="item.imageURL">
+        <img [src]="">
       </ion-avatar>
-        <h2>{{item.dados.nome}}</h2>
-        <p>{{item.dados.rua}}, {{item.dados.numero}} - {{item.dados.bairro}}</p>
+      <h2>{{estabelecimento.val().nome}}</h2>
+       <!-- <h2>{{item.dados.nome}}</h2>
+        <p>{{item.dados.rua}}, {{item.dados.numero}} - {{item.dados.bairro}}</p> -->
     </ion-item>
   </ion-list>
-
 </ion-content>

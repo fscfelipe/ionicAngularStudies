@@ -8,6 +8,7 @@
     </ion-toolbar>
   </ion-header>
 
+<!-- MENU SIDEBAR (É PRECISO DESATIVAR OUTROS MENUS(TAB) PARA FAZER FUNCIONAR -->)
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
@@ -20,3 +21,10 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<!--MENU EM TABS -->
+<ion-tabs class="tabs-basic">
+      <ion-tab tabIcon="home" tabTitle="Início" [root]="rootPage"></ion-tab>
+      <ion-tab tabIcon="alert" tabTitle="teste" [root]="testPage"></ion-tab>
+      <ion-tab tabIcon="navigate" tabTitle="Mapa" [root]="mapPage"></ion-tab>
+</ion-tabs>

@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-
 /**
  * Generated class for the MapPage page.
  *

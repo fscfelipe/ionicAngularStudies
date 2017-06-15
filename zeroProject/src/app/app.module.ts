@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 //Aqui também serão referenciadas as páginas
 import { MapPage } from '../pages/map-page/map-page';
 import { EstabelecimentoDetails } from '../pages/estabelecimento-details/estabelecimento-details';
+import { TestPage } from '../pages/test-page/test-page';
 
 
 //imports necessários para utilizar o firebase
@@ -26,7 +27,8 @@ import { MainPipe } from '../pipes/main-pipe.module';
     MyApp,
     HomePage,
     MapPage,
-    EstabelecimentoDetails
+    EstabelecimentoDetails,
+    TestPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { MainPipe } from '../pipes/main-pipe.module';
     MyApp,
     HomePage,
     MapPage,
-    EstabelecimentoDetails
+    EstabelecimentoDetails,
+    TestPage
   ],
   providers: [
     StatusBar,

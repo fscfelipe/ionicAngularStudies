@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {MapPage} from '../pages/map-page/map-page';
 
 import { HomePage } from '../pages/home/home';
+import { TestPage } from '../pages/test-page/test-page';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class MyApp {
   //essa variável define a página inicial do aplicativo
   //se quiséssemos colocar a página do mapa seria 'MapPage'
   rootPage:any = HomePage;
+  mapPage:any = MapPage;
+  testPage:any = TestPage;
 
   //os argumentos do construtor foram colocados em public, para o método de inicializar
   // o app utilizar essar variáveis.
@@ -31,9 +34,11 @@ export class MyApp {
     this.initializeApp();
 
     //atribui a variável page com os componetes das páginas
+    //USADO PARA SIBEBARMENU
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Mapa', component: MapPage }
+      { title: 'Mapa', component: MapPage },
+      { title: 'Teste', component: TestPage }
     ];
   }
 
