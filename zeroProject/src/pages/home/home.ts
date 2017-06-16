@@ -12,6 +12,7 @@ import { EstabelecimentoDetails } from '../estabelecimento-details/estabelecimen
 import { MapPage } from '../map-page/map-page';
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -28,7 +29,7 @@ export class HomePage {
   estabelecimentos: FirebaseListObservable<any[]>;
   estabSubject: Subject<any>;
   estabArray: Array<any>;
-  
+  originalEstabArray: Array<any>;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController ,
   public db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
@@ -37,7 +38,9 @@ export class HomePage {
 
     this.estabelecimentos = db.list('/estabelecimentos');
     this.estabArray = new Array;
+    this.originalEstabArray = new Array;
     this.iniciarEstabelecimentos();
+    this.estabArray = this.originalEstabArray;
 
     /*this.itemSubject = new Subject();
     
@@ -73,13 +76,11 @@ export class HomePage {
       snapshot.forEach(redes => {
         this.getDB('/estabelecimentos/'+redes.key).subscribe(estabelecimento =>{
           estabelecimento.forEach(dados => {
-            this.estabArray.push(dados);
+             this.originalEstabArray.push(dados);
           });
         });
       });
     });
-
-    console.log(this.estabArray);
   }
 
   getDB(url: string): FirebaseListObservable<any>{
@@ -90,21 +91,29 @@ export class HomePage {
     console.log(item);
   }
 
-  pesquisar(searchEvent){
-    let term = searchEvent.target.value || '';
-    // We will only perform the search if we have 3 or more characters
-    if (term.trim() === '' || term.trim().length < 3) {
-      // Load cached users
-      this.estabelecimentos = this.originalEstabele;
-    } else {
-       this.estabSubject.next(term) ;
-       this.estabelecimentos = this.estabQuery;
+  pesquisar(nome){
+    let term: string = nome.target.value || '';
+    console.log(term);
+    if (term.trim() === '' || term.trim().length < 3){
+      this.estabArray = this.originalEstabArray;
+    }else{
+      this.estabArray = [];
+      this.originalEstabArray.forEach(element => {
+          let aux: string = element.val().nome;
+          if( aux.toLowerCase().includes(term.toLowerCase())){
+            this.estabArray.push(element);
+           }
+      });
+
     }
   }
 
+  getArrayEstab(){
+    return this.originalEstabArray;
+  }
 
-showOptions(estabelecimento, estabKey) {
+  showOptions(estabelecimento, estabKey) {
    this.navCtrl.push(EstabelecimentoDetails, {estabelecimento, estabKey});
-}
+  }
 
 }
