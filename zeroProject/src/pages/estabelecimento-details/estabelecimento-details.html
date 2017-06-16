@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>{{item.dados.nome}}</ion-title>
+    <ion-title>{{estabelecimento.val().nome}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,25 +16,26 @@
 
 <ion-card>
 
-    <img [src]="item.imageURL" id ="imgCardapioEst" />
+    <img [src]="estabelecimento.val().imgURL" id ="imgCardapioEst" />
 
     <ion-card-content>
       <ion-card-title>
-        {{item.dados.nome}}
+        {{estabelecimento.val().nome}}
       </ion-card-title> 
-      <p>{{item.dados.tipo}} - {{item.dados.rua}}, {{item.dados.numero}}</p>
+      <p>{{estabelecimento.val().tipo}}</p>
+      <p> Tel.:{{estabelecimento.val().telefone}}</p>
     </ion-card-content>
 
   </ion-card>
 <div class="scrollbar" id="style-1">
   <ion-list>
-  <ion-item *ngFor="let produto of produtos | toArray" >
+  <ion-item *ngFor="let produto of produtosArray" >
     <ion-thumbnail item-start>
-      <img [src]="produto.imageURL">
+      <img [src]="produto.val().imagemURL">
     </ion-thumbnail>
-    <h2>{{produto.nome}}</h2>
-    <p>{{produto.descricao}}</p>
-    <button ion-button clear item-end>R${{produto.preco}}</button>
+    <h2>{{produto.val().nome}}</h2>
+    <p>{{produto.val().descricao}}</p>
+    <button ion-button clear item-end>R${{produto.val().preco}}</button>
   </ion-item>
 </ion-list>
 </div>

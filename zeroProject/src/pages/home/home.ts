@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController, Nav } from 'ionic-angular';
 
 //import necessário para firebase
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -38,7 +38,6 @@ export class HomePage {
     this.estabelecimentos = db.list('/estabelecimentos');
     this.estabArray = new Array;
     this.iniciarEstabelecimentos();
-    console.log(this.estabelecimentos);
 
     /*this.itemSubject = new Subject();
     
@@ -70,15 +69,16 @@ export class HomePage {
 
   //Função de pesquisa da home
   iniciarEstabelecimentos(){
-    this.getDB('/estabelecimentos').subscribe( snapshots => {
-      snapshots.forEach(snapshot => {
-        this.getDB('/estabelecimentos/'+snapshot.key).subscribe(snapshots =>{
-          snapshots.forEach(snapshot => {
-            this.estabArray.push(snapshot);
+    this.getDB('/estabelecimentos').subscribe( snapshot => {
+      snapshot.forEach(redes => {
+        this.getDB('/estabelecimentos/'+redes.key).subscribe(estabelecimento =>{
+          estabelecimento.forEach(dados => {
+            this.estabArray.push(dados);
           });
         });
       });
     });
+
     console.log(this.estabArray);
   }
 
@@ -89,6 +89,7 @@ export class HomePage {
   printa(item){
     console.log(item);
   }
+
   pesquisar(searchEvent){
     let term = searchEvent.target.value || '';
     // We will only perform the search if we have 3 or more characters
@@ -101,97 +102,9 @@ export class HomePage {
     }
   }
 
-  addItem(){
-  let prompt = this.alertCtrl.create({
-    title: 'Nome do item',
-    message: "Digite um nome para o item",
-    inputs: [
-      {
-        name: 'title',
-        placeholder: 'Name'
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          this.estabelecimentos.push({
-            title: data.title
-          });
-        }
-      }
-    ]
-  });
-  prompt.present();
+
+showOptions(estabelecimento, estabKey) {
+   this.navCtrl.push(EstabelecimentoDetails, {estabelecimento, estabKey});
 }
 
-showOptions(item, itemCardapios) {
-  /*let actionSheet = this.actionSheetCtrl.create({
-    title: 'O que você quer fazer?',
-    buttons: [
-      {
-        text: 'Delete Item',
-        role: 'destructive',
-        handler: () => {
-          this.removeItem(itemId);
-        }
-      },{
-        text: 'Update title',
-        handler: () => {
-          this.updateItem(itemId, itemTitle);
-        }
-      },{
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }
-    ]
-  });
-  actionSheet.present();
-  */
-   this.navCtrl.push(EstabelecimentoDetails, {item, itemCardapios});
-}
-
-removeItem(itemId: string){
-  this.estabelecimentos.remove(itemId);
-}
-
-updateItem(itemId, itemTitle){
-  let prompt = this.alertCtrl.create({
-    title: 'Item Name',
-    message: "Update the name for this item",
-    inputs: [
-      {
-        name: 'title',
-        placeholder: 'Title',
-        value: itemTitle
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          this.estabelecimentos.update(itemId, {
-            title: data.title
-          });
-        }
-      }
-    ]
-  });
-  prompt.present();
-}
 }

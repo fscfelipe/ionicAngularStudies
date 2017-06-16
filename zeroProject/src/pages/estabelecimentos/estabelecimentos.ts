@@ -20,6 +20,7 @@ export class Estabelecimentos {
   homePage = HomePage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
