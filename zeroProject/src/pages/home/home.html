@@ -1,26 +1,35 @@
-<!-- <ion-header>
-  FOI PRECISO RETIRAR PARA ADICIONAR O CONTEUDO NA TAB
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      Cardappio
-    </ion-title>
-    
+ <ion-header>
+ 
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
+ 
+ <ion-navbar color="danger">
 
-  </ion-navbar> 
+    <!-- Title -->
+    <ion-title *ngIf="!toggled">Cardappio</ion-title>
+    <!-- Search Bar -->
+    <ion-searchbar 
+          *ngIf="toggled" 
+          [showCancelButton]="true"
+          (ionClear) = "toggleSearch()" 
+          (ionCancel)="toggleSearch()" 
+          (ionInput)="pesquisar($event)"
+          >
+    </ion-searchbar>
+    <!-- Search Icon -->    
+    <ion-buttons end *ngIf="!toggled">
+      <button ion-button icon-only (click)="toggleSearch()"><ion-icon name="search"></ion-icon></button>
+    </ion-buttons>  
+
+</ion-navbar>
+
+  
   
 </ion-header>
--->
+
 
 <ion-content padding>
+
+
   Página inicial em construção.
 
   <!--AQUI É A BARRA DE PESQUISA, AS FUNÇÕES QUE SERÃO EXECUTADAS NA PESQUISA AINDA PRECISAM

@@ -18,11 +18,13 @@ import { MapPage } from '../map-page/map-page';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  
   //AQUI PODEMOS DECLARAR VARIÁVEIS QUE PODERÃO SER MANIPULADAS
   // PARA SEREM ADICIONADAS FUNCIONALIDADES, COMO A LISTA DE OBJETOS
   // QUE SERÃO "IMPORTADOS" DE UM BANCO EM UM SERVIDOR
   // EX: public x: number = 0;
   // Para acessar a variável no página html, usar {{x}}
+  public toggled: boolean;
 
   estabQuery: FirebaseListObservable<any[]>;
   originalEstabele: FirebaseListObservable<any[]>;
@@ -35,7 +37,7 @@ export class HomePage {
   public db: AngularFireDatabase , public actionSheetCtrl: ActionSheetController) {
     //instanciando as tabs
 
-
+     this.toggled = false;
     this.estabelecimentos = db.list('/estabelecimentos');
     this.estabArray = new Array;
     this.originalEstabArray = new Array;
@@ -70,7 +72,11 @@ export class HomePage {
   //    </ion-buttons>
   //
 
-  //Função de pesquisa da home
+    toggleSearch() {
+       this.toggled = this.toggled ? false : true;
+       this.estabArray = this.originalEstabArray;
+    }
+
   iniciarEstabelecimentos(){
     this.getDB('/estabelecimentos').subscribe( snapshot => {
       snapshot.forEach(redes => {
@@ -113,6 +119,8 @@ export class HomePage {
   }
 
   showOptions(estabelecimento, estabKey) {
+    //depois que a pessoa clicar no estabelecimento pesquisado, a tab de pesquisa irá fechar
+    this.toggleSearch();
    this.navCtrl.push(EstabelecimentoDetails, {estabelecimento, estabKey});
   }
 
